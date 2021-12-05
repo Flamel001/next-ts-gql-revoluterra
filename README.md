@@ -17,26 +17,20 @@ const News = () => {
 
 By default `**/*.graphqls` is recognized as GraphQL schema and `**/*.graphql` as GraphQL documents. If you prefer the other extensions, make sure the settings of the webpack loader in `next.config.js` and `.graphql-let.yml` are consistent.
 
-## Preview
-
-Preview the example live on [StackBlitz](http://stackblitz.com/):
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript-graphql)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript-graphql&project-name=with-typescript-graphql&repository-name=with-typescript-graphql)
-
 ## How to use
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+1.Clone the project
+2.Create `.env` file in the root
+3.Create or use one of your tokens from [Here](https://github.com/settings/tokens) Minimal "Select scopes" are `public_repo, user` and `write:discussion`
+4.Paste `GITHUB_AUTH_TOKEN=YOUR_TOKEN_FROM_POINT_3` in `.env` 5. Run
 
 ```bash
-npx create-next-app --example with-typescript-graphql with-typescript-graphql-app
+npm -i
+npm run-script dev
 # or
-yarn create next-app --example with-typescript-graphql with-typescript-graphql-app
+yarn
+yarn dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+6.???
+7.PROFIT
