@@ -1,16 +1,21 @@
-# import Partial from './partial.graphql'
-
 query Viewer {
-  viewer {
-    ...Partial
-    status
-  }
+	viewer {
+		avatarUrl
+		login
+	}
 }
 
-mutation UpdateName($name: String!) {
-  updateName(name: $name) {
-    id
-    name
-    status
-  }
+query UserRepositories($login: String!, $after: String) {
+	user(login: $login) {
+		repositories(first: 100, after: $after) {
+			pageInfo {
+				hasNextPage
+				endCursor
+			}
+			nodes {
+				name
+				id
+			}
+		}
+	}
 }

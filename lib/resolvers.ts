@@ -1,4 +1,4 @@
-import { QueryResolvers, MutationResolvers } from './type-defs.graphqls'
+// import { QueryResolvers, MutationResolvers } from './type-defs.graphqls'
 import { ResolverContext } from './apollo'
 
 const userProfile = {
@@ -7,17 +7,28 @@ const userProfile = {
   status: 'cached',
 }
 
-const Query: Required<QueryResolvers<ResolverContext>> = {
-  viewer(_parent, _args, _context, _info) {
-    return userProfile
-  },
-}
+// const Query: Required<QueryResolvers<ResolverContext>> = {
+//   viewer(_parent, _args, _context, _info) {
+//     return userProfile
+//   },
+//   repository() {
+//     return userProfile
+//   },
+// }
 
-const Mutation: Required<MutationResolvers<ResolverContext>> = {
-  updateName(_parent, _args, _context, _info) {
-    userProfile.name = _args.name
-    return userProfile
-  },
-}
+// const Query: Required<QueryResolvers<ResolverContext>> = {
+//   getRepositoryIssuesInfo(_parent, _args, _context, _info) {
+//     return userProfile
+//   },
+// }
 
-export default { Query, Mutation }
+// const Mutation: Required<MutationResolvers<ResolverContext>> = {
+//   updateName(_parent, _args, _context, _info) {
+//     userProfile.name = _args.name
+//     console.log({_parent, _args, _context, _info})
+//     return userProfile
+//   },
+// }
+
+// export default { Query }
+// export default { Query, Mutation }

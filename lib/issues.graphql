@@ -1,0 +1,42 @@
+query RepositoryIssues(
+	$repository: String!
+	$owner: String!
+	$after: String
+	$before: String
+) {
+	repository(name: $repository, owner: $owner) {
+		issues(first: 5, after: $after, before: $before) {
+			edges {
+				cursor
+			}
+			totalCount
+			nodes {
+				bodyText
+				comments {
+					totalCount
+				}
+				title
+				id
+				url
+			}
+		}
+	}
+}
+
+mutation AddCommentToIssue($id: String!, $comment: String!) {
+	addComment(input: { subjectId: $id, body: $comment }) {
+		commentEdge {
+			node {
+				issue {
+					bodyText
+					comments {
+						totalCount
+					}
+					title
+					url
+					id
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,17 @@
+@tailwind base;
+/* Write your global styles here, in PostCSS syntax */
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--header-height: 60px;
+}
+@layer base {
+	.h-header {
+		height: var(--header-height);
+	}
+
+	.h-content {
+		height: calc(100% - var(--header-height));
+	}
+}

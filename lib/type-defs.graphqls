@@ -1,7 +1,19 @@
 type Query {
-  viewer: User!
+	viewer: Viewer!
+	user(login: String!, after: String): UserRepositories!
+	repository(
+		name: String!
+		owner: String!
+		before: String
+		after: String
+	): RepositoryIssues!
 }
 
 type Mutation {
-  updateName(name: String!): User!
+	addComment(input: CommentInput): AddComment!
+}
+
+input CommentInput {
+	subjectId: String
+	body: String
 }

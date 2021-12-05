@@ -1,0 +1,37 @@
+type AddComment {
+	commentEdge: CommentEdge!
+}
+
+type CommentEdge {
+	node: Issue!
+}
+
+type Issue {
+	issue: IssueNode!
+}
+
+type RepositoryIssues {
+	issues(first: Int, after: String, before: String): IssueNodes!
+}
+
+type IssueNodes {
+	edges: [Edge]!
+	totalCount: Int!
+	nodes: [IssueNode]!
+}
+
+type Edge {
+	cursor: ID!
+}
+
+type IssueNode {
+	bodyText: String!
+	comments: Comments!
+	title: String!
+	id: ID!
+	url: String!
+}
+
+type Comments {
+	totalCount: Int!
+}

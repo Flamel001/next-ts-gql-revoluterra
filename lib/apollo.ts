@@ -4,7 +4,12 @@ import {
   ApolloClient,
   InMemoryCache,
   NormalizedCacheObject,
+  createHttpLink,
 } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context';
+// require('dotenv').config()
+
+
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
@@ -13,24 +18,28 @@ export type ResolverContext = {
   res?: ServerResponse
 }
 
-function createIsomorphLink(context: ResolverContext = {}) {
-  if (typeof window === 'undefined') {
-    const { SchemaLink } = require('@apollo/client/link/schema')
-    const { schema } = require('./schema')
-    return new SchemaLink({ schema, context })
-  } else {
-    const { HttpLink } = require('@apollo/client')
-    return new HttpLink({
-      uri: '/api/graphql',
-      credentials: 'same-origin',
-    })
+
+const httpLink = createHttpLink({
+  uri: 'https://api.github.com/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // return the headers to the context so httpLink can read them
+
+  return {
+    headers: {
+      ...headers,
+      authorization: `Bearer ${process.env.GITHUB_AUTH_TOKEN}`,
+    }
   }
-}
+});
 
 function createApolloClient(context?: ResolverContext) {
+// function createApolloClient() {
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
-    link: createIsomorphLink(context),
+    // ssrMode: typeof window === 'undefined',
+    link: authLink.concat(httpLink),
+    // link: createIsomorphLink(context),
     cache: new InMemoryCache(),
   })
 }

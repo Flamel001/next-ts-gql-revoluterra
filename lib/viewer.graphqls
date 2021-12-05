@@ -1,0 +1,23 @@
+type Viewer {
+	avatarUrl: String!
+	login: String!
+}
+
+type UserRepositories {
+	repositories(first: Int!, after: String): Repository!
+}
+
+type Repository {
+	nodes: [Node]!
+	pageInfo: PageInfo
+}
+
+type PageInfo {
+	hasNextPage: Boolean!
+	endCursor: String
+}
+
+type Node {
+	name: String!
+	id: ID!
+}
