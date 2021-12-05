@@ -1,10 +1,9 @@
-import { ViewerDocument, ViewerQueryResult } from "../lib/viewer.graphql";
+import { ViewerDocument, ViewerQueryResult } from "../lib/user.graphql";
 import { initializeApollo } from "../lib/apollo";
 import { Viewer } from "../__generated__/__types__";
 import MainLayout from "../layouts/MainLayout";
 
 const Index = () => {
-	// const Index = ({ login, repositories: { nodes } }: Viewer) => {
 	return (
 		<h2 className="text-lg text-center p-4 whitespace-pre-wrap flex items-center justify-center h-full">
 			{`Type reposiory owner 
@@ -12,8 +11,6 @@ const Index = () => {
       to get the list of associated issies`}
 		</h2>
 	);
-	// return` <MainLayout login={login} />;
-	// {ServerPropsForQuery and qProps ? <issueList> : <Explanation>}
 };
 
 export async function getStaticProps() {

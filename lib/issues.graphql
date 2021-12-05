@@ -5,11 +5,11 @@ query RepositoryIssues(
 	$before: String
 ) {
 	repository(name: $repository, owner: $owner) {
-		issues(first: 5, after: $after, before: $before) {
-			edges {
-				cursor
+		issues(first: 100, after: $after, before: $before) {
+			pageInfo {
+				hasNextPage
+				endCursor
 			}
-			totalCount
 			nodes {
 				bodyText
 				comments {

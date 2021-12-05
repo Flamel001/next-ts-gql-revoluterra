@@ -1,19 +1,9 @@
 import Input from "./Input";
-import Button from "./Button";
-
-import { initializeApollo } from "../lib/apollo";
-import { useUserRepositoriesLazyQuery } from "../lib/viewer.graphql";
-import { UserRepositories, Node, Repository } from "../__generated__/__types__";
-import { useState, Dispatch, SetStateAction } from "react";
-import { useRepositoryIssuesLazyQuery } from "../lib/issues.graphql";
+import { Repository } from "../__generated__/__types__";
+import { useState } from "react";
 import { useRouter } from "next/dist/client/router";
-import { useUserRepositoriesQuery } from "../__generated__/lib/viewer.graphql";
+import { useUserRepositoriesQuery } from "../lib/user.graphql";
 
-export type SearchProps = {
-	owner?: string;
-	repository?: string;
-};
-// const Search = ({ owner, repository }: SearchProps) => {
 const Search = () => {
 	const [ownerError, setOwnerError] = useState("");
 	const [repositoryError, setRepositoryError] = useState("");
@@ -23,39 +13,25 @@ const Search = () => {
 	useUserRepositoriesQuery({
 		variables: { login: owner },
 		pollInterval: 500,
+		skip: owner === "",
 		onCompleted: (data) => {
 			setOwnerError("");
-			let {
-				user: {
-					repositories: { nodes, pageInfo },
-				},
-			} = data;
-			let result = nodes;
-			setRepositories(result);
-			// while (pageInfo.hasNextPage) {
-			// 	await getUserRepositories({
-			// 		variables: { login: owner, after: pageInfo.endCursor },
-			// 	});
-			// 	({
-			// 		user: {
-			// 			repositories: { nodes, pageInfo },
-			// 		},
-			// 	} = data);
-			// 	result.concat(nodes);
-			// 	console.log("cycle", { result });
-			// 	setRepositories(result);
-			// }
-			// } else {
-			// }
+			//if first symbol in owner input deleted before query completes - here could be error
+			try {
+				let {
+					user: {
+						repositories: { nodes },
+					},
+				} = data;
+				let result = nodes;
+				setRepositories(result);
+			} catch {}
 		},
 		onError: () => {
 			setRepositories([]);
-			if (owner !== "") {
-				setOwnerError("Could not find user " + owner);
-			}
+			setOwnerError("Could not find user " + owner);
 		},
 	});
-
 	const router = useRouter();
 
 	const onOwnerInput = (e: React.ChangeEvent<HTMLInputElement>) => {

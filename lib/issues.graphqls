@@ -15,13 +15,8 @@ type RepositoryIssues {
 }
 
 type IssueNodes {
-	edges: [Edge]!
-	totalCount: Int!
 	nodes: [IssueNode]!
-}
-
-type Edge {
-	cursor: ID!
+	pageInfo: PageInfo
 }
 
 type IssueNode {

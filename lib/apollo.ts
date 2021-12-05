@@ -7,17 +7,8 @@ import {
   createHttpLink,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context';
-// require('dotenv').config()
-
-
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
-
-export type ResolverContext = {
-  req?: IncomingMessage
-  res?: ServerResponse
-}
-
 
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
@@ -34,23 +25,19 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
-function createApolloClient(context?: ResolverContext) {
-// function createApolloClient() {
+function createApolloClient() {
+
   return new ApolloClient({
-    // ssrMode: typeof window === 'undefined',
+    ssrMode: typeof window === 'undefined',
     link: authLink.concat(httpLink),
-    // link: createIsomorphLink(context),
     cache: new InMemoryCache(),
   })
 }
 
 export function initializeApollo(
   initialState: any = null,
-  // Pages with Next.js data fetching methods, like `getStaticProps`, can send
-  // a custom context which will be used by `SchemaLink` to server render pages
-  context?: ResolverContext
 ) {
-  const _apolloClient = apolloClient ?? createApolloClient(context)
+  const _apolloClient = apolloClient ?? createApolloClient()
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // get hydrated here

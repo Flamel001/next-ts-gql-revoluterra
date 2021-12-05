@@ -10,7 +10,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
 	const { avatarUrl, login } = pageProps;
 	return (
-		// <ApolloProvider client={client}>
 		<ApolloProvider client={apolloClient}>
 			<MainLayout avatarUrl={avatarUrl} login={login}>
 				<Component {...pageProps} />

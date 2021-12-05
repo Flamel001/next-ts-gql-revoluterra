@@ -8,7 +8,6 @@ type MainLayoutProps = {
 const MainLayout = ({ children, avatarUrl, login }: MainLayoutProps) => {
 	return (
 		<main className="font-comfortaa text-gray-800 h-screen">
-			{/* <main className="font-comfortaa text-gray-800 grid h-screen content-start row-auto"> */}
 			<Header avatarUrl={avatarUrl} login={login} />
 			<section className="grid grid-cols-3 h-content">
 				<Search />
@@ -19,15 +18,5 @@ const MainLayout = ({ children, avatarUrl, login }: MainLayoutProps) => {
 		</main>
 	);
 };
-
-// export const getServerSideProps = (ctx) => {
-//   const apolloClient = initializeApollo()
-
-//   return {
-//       props:{
-//         initialApolloState: apolloClient.cache.extract(),
-//       }
-//   }
-// }
 
 export default MainLayout;
