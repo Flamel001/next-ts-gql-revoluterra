@@ -43,12 +43,12 @@ const Issue = ({ node }: IssueProps) => {
 	};
 
 	return (
-		<article className="p-4 border-2 rounded-2xl shadow-lg bg-green-100 relative">
-			<p className="absolute right-4 top-4">Comments amount: {totalCount}</p>
+		<article className="p-4 border-2 rounded-2xl shadow-lg bg-green-100">
 			<h3 className="text-center text-xl text-blue-600 capitalize">
 				<a href={url}>{title}</a>
 			</h3>
 			<p className="p-4">{bodyText}</p>
+			<p className="text-right">Comments amount: {totalCount}</p>
 			<Input
 				placeholder="Leave a comment..."
 				onInput={onCommentInput}
